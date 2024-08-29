@@ -1,3 +1,4 @@
+// Initialize VANTA Effect
 VANTA.BIRDS({
     el: "#vanta-bg",
     mouseControls: true,
@@ -19,15 +20,20 @@ VANTA.BIRDS({
     quantity: 4.00
 });
 
+// Scroll Animation Functionality
 document.addEventListener('DOMContentLoaded', () => {
-    const cards = document.querySelectorAll('.bird-card');
-    cards.forEach((card, index) => {
-        card.style.opacity = '0';
-        card.style.transform = 'translateY(50px)';
-        setTimeout(() => {
-            card.style.transition = 'opacity 1s ease, transform 1s ease';
-            card.style.opacity = '1';
-            card.style.transform = 'translateY(0)';
-        }, 500 * (index + 1));
-    });
+    const elements = document.querySelectorAll('.scroll-animation');
+
+    const scrollAnimation = () => {
+        elements.forEach(element => {
+            const position = element.getBoundingClientRect();
+            if (position.top < window.innerHeight - 100) {
+                element.classList.add('visible');
+                element.classList.remove('hidden');
+            }
+        });
+    };
+
+    window.addEventListener('scroll', scrollAnimation);
+    scrollAnimation(); // Run on load
 });
